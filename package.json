@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/alexcambose/jwt#readme",
   "dependencies": {
-    "jest": "^26.0.1"
+    "base64url": "^3.0.1",
+    "jest": "^26.0.1",
+    "lodash": "^4.17.15"
   }
 }
