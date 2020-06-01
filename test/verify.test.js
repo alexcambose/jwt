@@ -24,5 +24,22 @@ describe('verify', () => {
     };
     expect(t).toThrow(Error);
   });
-  it('should fail if expiration date is exceeded', () => {});
+  it('should throw error if no secret is specified and algorithm is not none', () => {
+    const token = jwt.sign(payload, 'secret', { alg: 'HS256' });
+    expect(() => {
+      jwt.verify(token);
+    }).toThrow(Error);
+  });
+  it('should work with unsecured jwt', () => {
+    const token = jwt.sign(payload);
+    expect(() => {
+      jwt.verify(token);
+    }).not.toThrow(Error);
+  });
+  it('should fail if expiration date is exceeded', () => {
+    const token = jwt.sign(payload, 'secret', { exp: -1 });
+    expect(() => {
+      jwt.verify(token, 'secret');
+    }).toThrow(Error);
+  });
 });

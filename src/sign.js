@@ -8,6 +8,9 @@ module.exports = (payloadData, secret, options = {}) => {
     alg: 'HS256',
     ..._.pick(options, ['alg']),
   };
+  if (options.exp) {
+    options.exp += Math.round(new Date().getTime() / 1000);
+  }
   const payload = {
     iat: Math.round(new Date().getTime() / 1000),
     ..._.omit(options, ['alg']),
@@ -21,7 +24,7 @@ module.exports = (payloadData, secret, options = {}) => {
 
     return `${encodedHeader}.${encodedPayload}.`;
   }
-  const signature = crypto.createHmac('sha256', secret).update(`${encodedHeader}.${encodedPayload}`);
-  console.log(signature);
-  return `${encodedHeader}.${encodedPayload}.${base64url(signature)}`;
+  const signature = crypto.createHmac('sha256', secret).update(`${encodedHeader}.${encodedPayload}`).digest('base64');
+  const encodedSignature = base64url.fromBase64(signature);
+  return `${encodedHeader}.${encodedPayload}.${encodedSignature}`;
 };
