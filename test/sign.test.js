@@ -53,10 +53,21 @@ describe('sign', () => {
     });
   });
   describe('unsecured jwt', () => {
-    it('should remove the signature', () => {
+    it('should set the header if on signature is specified', () => {
       const token = jwt.sign(payload);
-      const [, , signature] = token.split('.');
-      expect(signature).toBeFalsy();
+      const [tokenHeader] = token.split('.');
+      const decodedHeader = JSON.parse(base64url.decode(tokenHeader));
+
+      expect(decodedHeader.alg).toBe('none');
+    });
+
+    it('should remove the signature', () => {
+      const token1 = jwt.sign(payload);
+      const [, , signature1] = token1.split('.');
+      expect(signature1).toBeFalsy();
+      const token2 = jwt.sign(payload, null, { alg: 'none' });
+      const [, , signature2] = token2.split('.');
+      expect(signature2).toBeFalsy();
     });
   });
 });
