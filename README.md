@@ -4,9 +4,9 @@ Simple JWT library for educational purposes only
 
 This module is part of these two Medium publications:
 
-[How JWT works — in depth](https://medium.com/@alexcambose/how-jwt-works-in-depth-354cb5dc360d)
+[How JWT works — in depth (part 1)](https://medium.com/@alexcambose/how-jwt-works-in-depth-354cb5dc360d)
 
-[How JWT works — in depth](https://medium.com/@alexcambose/how-jwt-works-in-depth-604c93ec20a4)
+[How JWT works — in depth (part 2)](https://medium.com/@alexcambose/how-jwt-works-in-depth-604c93ec20a4)
 
 ## Installation
 
